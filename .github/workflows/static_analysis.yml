@@ -3,7 +3,7 @@ on:
     branches: [main]
 
 jobs:
-  CI:
+  StaticAnalysis:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
