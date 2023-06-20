@@ -50,6 +50,12 @@
         ],
         "stan": [
             "phpstan analyse --memory-limit=1G"
+        ],
+        "sniffer": [
+            "./vendor/bin/phpcs --standard=phpcs.xml ./"
+        ],
+        "sniffer-rewrite": [
+            "./vendor/bin/phpcbf --standard=phpcs.xml ./"
         ]
     },
     "extra": {
