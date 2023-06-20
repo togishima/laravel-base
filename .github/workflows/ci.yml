@@ -1,7 +1,13 @@
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types:
+      - opened
   workflow_call:
+
+env:
+  PHP_VERSION: 8.2
 
 jobs:
   CI:
@@ -10,12 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup PHP with PECL extension
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: ${{ env.PHP_VERSION }}
+          tools: phpunit
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       
-      - name: Install Libraries
+      - name: install dependencies
         run: cd src && composer install
       
       - name: Run PHP Code Sniffer
@@ -28,4 +38,4 @@ jobs:
         run: cd src && composer stan:ci
       
       - name: Run PHPUnit
-        run: php artisan test
+        run: cd src && php artisan test
