@@ -1,0 +1,41 @@
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+  workflow_call:
+
+env:
+  PHP_VERSION: 8.2
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          tools: phpunit
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      
+      - name: install dependencies
+        run: cd src && composer install
+      
+      - name: Run PHP Code Sniffer
+        run: cd src && composer sniffer:ci
+
+      - name: Run PHP Mess Detector
+        run: cd src && composer phpmd:ci
+
+      - name: Run PHPStan
+        run: cd src && composer stan:ci
+      
+      - name: Run PHPUnit
+        run: cd src && php artisan test
