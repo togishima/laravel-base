@@ -1,3 +1,5 @@
+name: "Static Analysis"
+
 on:
   pull_request:
     branches: [main]
