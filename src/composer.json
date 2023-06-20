@@ -52,6 +52,9 @@
         "stan": [
             "phpstan analyse --memory-limit=1G"
         ],
+        "md": [
+            "phpmd app text phpmd.xml"
+        ],
         "sniffer": [
             "./vendor/bin/phpcs --standard=phpcs.xml ./"
         ],
