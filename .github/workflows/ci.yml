@@ -13,7 +13,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-
+      
+      - name: Install Libraries
+        run: cd src && composer install
+      
       - name: Run PHPCS
         run: cd src && composer sniffer:ci
 
