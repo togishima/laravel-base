@@ -53,7 +53,7 @@
         "stan": [
             "phpstan analyse --memory-limit=1G"
         ],
-        "md": [
+        "phpmd": [
             "phpmd app text phpmd.xml"
         ],
         "sniffer": [
@@ -61,6 +61,15 @@
         ],
         "sniffer-rewrite": [
             "./vendor/bin/phpcbf --standard=phpcs.xml ./"
+        ],
+        "sniffer:ci": [
+            "phpcs --report=checkstyle -q ./ | cs2pr"
+        ],
+        "phpmd:ci": [
+            "phpmd app github phpmd.xml --ignore-violations-on-exit"
+        ],
+        "stan:ci": [
+            "phpstan analyse --memory-limit=1G --error-format=checkstyle | cs2pr"
         ]
     },
     "extra": {
