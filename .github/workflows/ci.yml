@@ -1,11 +1,10 @@
-name: "Static Analysis"
-
 on:
   pull_request:
     branches: [main]
+  workflow_call:
 
 jobs:
-  StaticAnalysis:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -19,12 +18,14 @@ jobs:
       - name: Install Libraries
         run: cd src && composer install
       
-      - name: Run PHPCS
+      - name: Run PHP Code Sniffer
         run: cd src && composer sniffer:ci
 
-      - name: Run PHPMD
+      - name: Run PHP Mess Detector
         run: cd src && composer phpmd:ci
 
       - name: Run PHPStan
         run: cd src && composer stan:ci
       
+      - name: Run PHPUnit
+        run: php artisan test
