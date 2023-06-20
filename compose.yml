@@ -1,0 +1,26 @@
+services:
+  php:
+    container_name: php
+    build: ./build/php
+    ports:
+      - 80:80
+    volumes: 
+      - ./src:/var/www/src
+      - ./build/php/php.ini:/usr/local/etc/php/php.ini
+      - ./build/php/default.conf:/etc/apache2/sites-enabled/000-default.conf
+  database:
+    image: postgres
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: snow-concierge
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      TZ: "Asia/Tokyo"
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./build/db/initdb.d:/docker-entry-point-initdb.d
+    ports:
+      - '5432:5432'
+volumes:
+  db:
