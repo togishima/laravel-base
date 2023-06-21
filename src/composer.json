@@ -67,7 +67,8 @@
         "lint:local":[
             "composer stan",
             "composer phpmd",
-            "composer sniffer-rewrite"
+            "composer sniffer-rewrite",
+            "composer sniffer"
         ],
         "sniffer:ci": [
             "phpcs --report=checkstyle -q ./ | cs2pr"
