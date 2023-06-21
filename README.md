@@ -1,0 +1,2 @@
+# laravel-base
+Laravel開発用のログイン周りとMPAの管理画面付きボイラープレート
