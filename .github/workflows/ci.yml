@@ -1,9 +1,7 @@
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
+  push:
+    branches-ignore:
+      - "main"
   workflow_call:
 
 env:

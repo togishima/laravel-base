@@ -1,13 +1,18 @@
 services:
   php:
     container_name: php
-    build: ./build/php
+    build: 
+      dockerfile: ./build/php/Dockerfile
+      context: .
     ports:
       - 80:80
     volumes: 
       - ./src:/var/www/src
       - ./build/php/php.ini:/usr/local/etc/php/php.ini
       - ./build/php/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - postgres
+      - mailpit
   database:
     image: postgres
     container_name: postgres
@@ -22,5 +27,12 @@ services:
       - ./build/db/initdb.d:/docker-entry-point-initdb.d
     ports:
       - '5432:5432'
+  mailpit:
+    image: 'axllent/mailpit:latest'
+    container_name: mailpit
+    restart: unless-stopped
+    ports:
+      - '1025:1025'
+      - '8025:8025' 
 volumes:
   db:
