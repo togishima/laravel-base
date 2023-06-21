@@ -71,7 +71,7 @@
             "composer sniffer"
         ],
         "sniffer:ci": [
-            "phpcs --standard=phpcs.xml ./ | cs2pr"
+            "phpcs --standard=phpcs.xml -q ./ --report=checkstyle | cs2pr"
         ],
         "phpmd:ci": [
             "phpmd app github phpmd.xml --ignore-violations-on-exit"
