@@ -40,6 +40,6 @@ class LoginController extends Controller
 
     public function loggedOut(): RedirectResponse
     {
-        return redirect('/admin');
+        return redirect(RouteServiceProvider::HOME);
     }
 }

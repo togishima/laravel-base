@@ -18,5 +18,6 @@ Route::group(['prefix' => 'admin'], function () {
     Auth::routes([
         'register' => false
     ]);
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', fn() => redirect('/admin/dashboard'));
+    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
