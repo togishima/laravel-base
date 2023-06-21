@@ -64,6 +64,11 @@
         "sniffer-rewrite": [
             "./vendor/bin/phpcbf --standard=phpcs.xml ./"
         ],
+        "lint:local":[
+            "composer stan",
+            "composer phpmd",
+            "composer sniffer-rewrite"
+        ],
         "sniffer:ci": [
             "phpcs --report=checkstyle -q ./ | cs2pr"
         ],
