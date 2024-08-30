@@ -50,7 +50,12 @@
         ],
         "stan": "./vendor/bin/phpstan --memory-limit=2G --configuration=./phpstan.neon",
         "lint": "vendor/bin/ecs check --config=ecs.php",
-        "lint:fix": "vendor/bin/ecs check --config=ecs.php --fix"
+        "lint:fix": "vendor/bin/ecs check --config=ecs.php --fix",
+        "ci:local": [
+            "@lint:fix",
+            "@stan",
+            "@php artisan test"
+        ]
     },
     "extra": {
         "laravel": {
