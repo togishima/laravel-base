@@ -5,7 +5,7 @@ on:
   workflow_call:
 
 env:
-  PHP_VERSION: 8.2
+  PHP_VERSION: 8.3
 
 jobs:
   CI:
@@ -26,11 +26,8 @@ jobs:
       - name: install dependencies
         run: cd src && composer install
       
-      - name: Run PHP Code Sniffer
-        run: cd src && composer sniffer:ci
-
-      - name: Run PHP Mess Detector
-        run: cd src && composer phpmd:ci
+      - name: Run Linter
+        run: cd src && composer lint
 
       - name: Run PHPStan
         run: cd src && composer stan:ci
