@@ -11,7 +11,7 @@ services:
       - ./build/php/php.ini:/usr/local/etc/php/php.ini
       - ./build/php/default.conf:/etc/apache2/sites-enabled/000-default.conf
     depends_on:
-      - postgres
+      - database
       - mailpit
   database:
     image: postgres
@@ -24,7 +24,7 @@ services:
       TZ: "Asia/Tokyo"
     volumes:
       - db:/var/lib/postgresql/data
-      - ./build/db/initdb.d:/docker-entry-point-initdb.d
+      # - ./build/db/initdb.d:/docker-entry-point-initdb.d
     ports:
       - '5432:5432'
   mailpit:
